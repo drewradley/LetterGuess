@@ -10,7 +10,7 @@
 <body>
 
   <div class="jumbotron text-center" id="game">
-    <h1>Press any letter to start playing!</h1>
+    <h1>I'm thinking of a letter. Try to guess it if you can!</h1>
   </div>
   
   <script type="text/javascript">
@@ -19,7 +19,7 @@
 
     // Creating variables to hold the number of wins, losses, and ties. They start at 0.
     var wins = 0;
-    var guesses = 0;
+    var guesses = 9;
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
     var userGuesses = [];
     
@@ -30,7 +30,7 @@
       {
         if(userGuesses.indexOf(userGuess)<0)
         {
-          guesses++;
+          guesses--;
           userGuesses.push(userGuess);
         }
        
@@ -51,15 +51,15 @@
       if(wins>0)
       {
         var html =
-          "<h2>You won! The computer chose: " + computerGuess + "</h2>" ;
+          "<h2>You won! I picked: " + computerGuess + "</h2>" ;
           
         document.querySelector("#game").innerHTML = html;
         return;
       }
-      if(guesses>8)
+      if(guesses<1)
       {
         var html =
-          "<h2>You lost! The computer chose: " + computerGuess + "</h2>" ;
+          "<h2>You lost! I picked: " + computerGuess + "</h2>" ;
           
         document.querySelector("#game").innerHTML = html;
         return;
