@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Letter Guess Game</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div class="jumbotron text-center" id="game">
+    <h1>Press any letter to start playing!</h1>
+  </div>
+  
+  <script type="text/javascript">
+  var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
+"q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+    // Creating variables to hold the number of wins, losses, and ties. They start at 0.
+    var wins = 0;
+    var guesses = 0;
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    var userGuesses = [];
+    
+    document.onkeyup = function(event) {
+      
+      var userGuess = event.key;
+      if(computerChoices.indexOf(userGuess.toLowerCase())>=0)
+      {
+        if(userGuesses.indexOf(userGuess)<0)
+        {
+          guesses++;
+          userGuesses.push(userGuess);
+        }
+       
+        
+        var ug =computerChoices.indexOf(userGuess.toLowerCase());
+        var cg =computerChoices.indexOf(computerGuess);
+        if(ug===cg)
+        {
+          wins++;
+        }
+
+         var html =
+          "<h2>You chose: " + userGuess + "</h2>" +
+          "<h3>Guesses: " + guesses + "</h3>"; //+
+
+        document.querySelector("#game").innerHTML = html;
+        
+      if(wins>0)
+      {
+        var html =
+          "<h2>You won! The computer chose: " + computerGuess + "</h2>" ;
+          
+        document.querySelector("#game").innerHTML = html;
+        return;
+      }
+      if(guesses>8)
+      {
+        var html =
+          "<h2>You lost! The computer chose: " + computerGuess + "</h2>" ;
+          
+        document.querySelector("#game").innerHTML = html;
+        return;
+      }
+    }
+
+      
+  }
+  </script>
+
+</body>
+
+</html>
